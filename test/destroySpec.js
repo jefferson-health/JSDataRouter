@@ -1,19 +1,42 @@
 'use strict';
 
-var chai = require('chai');
-var sinon = require('sinon');
-var sinonChai = require('sinon-chai');
-chai.should();
-chai.use(sinonChai);
+var destroyFns = require('../src/destroy');
 
-var destroy = require('../src/destroy');
+describe('destroy', function() {
 
-describe('destroy', () => {
-  describe('beforeDestroy', () => {
+  describe('beforeDestroy', function() {
+
     it('should call next by default', () => {
       let nextSpy = sinon.spy();
-      destroy.beforeDestroy({}, {}, nextSpy)
+      destroyFns.beforeDestroy({}, {}, nextSpy)
       nextSpy.should.have.been.calledOnce;
+    })
+  })
+
+  describe('destroy', function() {
+
+    it('should call destroy on this.resource and then call next', function (done) {
+      let resolved = Promise.resolve(true)
+      let resourceMock = {
+        destroy: sinon.stub().returns(resolved)
+      }
+      let nextSpy = sinon.spy();
+      let req = {
+        resource: {
+          body: {
+            id: 1
+          }
+        }
+      }
+      let _this = {
+        resource: resourceMock,
+        errorHandler: sinon.spy()
+      };
+      destroyFns.destroy.call(_this, req, {}, nextSpy);
+      resolved.then(function() {
+        nextSpy.should.have.been.calledOnce;
+        done();
+      })
     })
   })
 })
