@@ -8,7 +8,7 @@ describe('destroy', function() {
 
     it('should call next by default', () => {
       let nextSpy = sinon.spy();
-      destroyFns.beforeDestroy({}, {}, nextSpy)
+      destroyFns.beforeAction({}, {}, nextSpy)
       nextSpy.should.have.been.calledOnce;
     })
   })
@@ -28,11 +28,7 @@ describe('destroy', function() {
           }
         }
       }
-      let _this = {
-        resource: resourceMock,
-        errorHandler: sinon.spy()
-      };
-      destroyFns.destroy.call(_this, req, {}, nextSpy);
+      destroyFns.action(req, {}, nextSpy, resourceMock);
       resolved.then(function() {
         nextSpy.should.have.been.calledOnce;
         done();

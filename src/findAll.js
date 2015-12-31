@@ -3,7 +3,7 @@ module.exports = {
 	  next();
 	},
 
-	findAll: function(req, res, next) {
+	findAll: function(req, res, next, resource) {
 	  this.resource.findAll(
 	    req.query,
 	    {
@@ -11,10 +11,9 @@ module.exports = {
 	    }
 	  )
 	  .then(function(resources) {
-	    req.resources=resources;
+	    req.resources = resources;
 	    next();
-	  })
-	  .catch(this.errorHandler(res));
+	  });
 	},
 
 	afterFindAll: function(req, res, next) {

@@ -1,20 +1,22 @@
 module.exports = {
-	beforeCreate: function(req, res, next) {
-		next();
-	},
+  method: 'post',
+  path: '/',
+  beforeAction: function beforeCreate(req, res, next) {
+    next();
+  },
 
-	create: function(req, res, next) {
-	  this.resource.create(req.body)
-	  .then(function(createdResource) {
-	    req.createdResource = createdResource;
-	    next();
-	  })
-	  .catch(this.errorHandler(res));
-	},
+  action: function create(req, res, next, resource) {
+    resource.create(req.body)
+    .then(function(createdResource) {
+      req.createdResource = createdResource;
+      next();
+    })
+    .catch(next);
+  },
 
-	afterCreate: function(req, res, next) {
-	  res.status(200)
-	    .send(req.createdResource)
-	    .end();
-	}
+  afterAction: function afterCreate(req, res, next) {
+    res.status(200)
+      .send(req.createdResource)
+      .end();
+  }
 };

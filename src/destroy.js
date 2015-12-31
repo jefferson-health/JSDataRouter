@@ -1,17 +1,19 @@
 module.exports = {
-  beforeDestroy: function beforeDestroy(req, res, next) {
+  name: 'destroy',
+  method: 'post',
+  path: '/:resourceId',
+  beforeAction: function beforeDestroy(req, res, next) {
     next();
   },
 
-  destroy: function destroy(req, res, next) {
-    this.resource.destroy(req.resource.body.id)
+  action: function destroy(req, res, next, resource) {
+    resource.destroy(req.resource.body.id)
       .then(() => {
         next();
-      })
-      .catch(this.errorHandler(res));
+      });
   },
 
-  afterDestroy: function afterDestroy(req, res, next) {
+  afterAction: function afterDestroy(req, res, next) {
     res.send(200)
       .end();
   }
