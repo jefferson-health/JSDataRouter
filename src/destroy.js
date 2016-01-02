@@ -3,8 +3,8 @@ module.exports = {
     next();
   },
 
-  destroy: function destroy(req, res, next) {
-    this.resource.destroy(req.resource.body.id)
+  destroy: function destroy(req, res, next, resource) {
+    resource.destroy(req.resource.body.id)
       .then(() => {
         next();
       })

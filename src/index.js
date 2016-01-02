@@ -7,6 +7,7 @@ var findAll = require('./findAll');
 var find = require('./find');
 var create = require('./create');
 var update = require('./update');
+var destroy = require('./destroy');
 
 var defaultOptions = {
   enabledActions:{
@@ -60,10 +61,10 @@ class JSDataRouter {
     }
 
     if(options.enabledActions.destroy) {
-      this.router.post('/', 
-        this.beforeCreate.bind(this),
-        this.create.bind(this),
-        this.afterCreate.bind(this));
+      this.router.delete('/',
+        this.beforeDestroy.bind(this),
+        this.destroy.bind(this),
+        this.afterDestroy.bind(this));
     }
     
     return this;
@@ -78,4 +79,4 @@ class JSDataRouter {
 }
 
 module.exports = JSDataRouter;
-Object.assign(JSDataRouter.prototype, findAll, find, create, update);
+Object.assign(JSDataRouter.prototype, findAll, find, create, update, destroy);
