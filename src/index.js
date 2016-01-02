@@ -61,7 +61,7 @@ class JSDataRouter {
     }
 
     if(options.enabledActions.destroy) {
-      this.router.delete('/',
+      this.router.delete('/:resourceId',
         this.beforeDestroy.bind(this),
         this.destroy.bind(this),
         this.afterDestroy.bind(this));
