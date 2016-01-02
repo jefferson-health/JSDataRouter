@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@chapel.tjh.tju.edu:dxr224/JSDataRouter.git"
+    "url": "git@github.com:jefferson-health/JSDataRouter.git"
   },
   "keywords": [
     "js-data",
