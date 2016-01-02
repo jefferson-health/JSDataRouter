@@ -5,57 +5,43 @@ var findAll = require('./findAll');
 var find = require('./find');
 var create = require('./create');
 var param = require('./param');
-var update = require('./update');
-var destroy = require('./destroy');
 
-function addAction(router, resource, action) {
-  router[action.method](action.path,
-    action.beforeAction.bind(this),
-    actionPassThrough(resource, action.action),
-    action.afterAction.bind(this));
-}
+class JSDataRouter {
 
-function actionPassThrough(resource, fn) {
-  return (req, res, next) => {
-    fn(req, res, next, resource)
+	constructor(resource, router) {
+    if(router === undefined) {
+      router = express.Router(); 
+    }
+
+    this.router = router;
+    this.resource = resource;
+    this.router.param('resourceId', param.bind(this));
+
+		this.router.get('/',
+			this.beforeFindAll.bind(this),
+			this.findAll.bind(this),
+			this.afterFindAll.bind(this));
+
+    this.router.get('/:resourceId',
+      this.beforeFind.bind(this),
+      this.find.bind(this),
+      this.afterFind.bind(this));
+
+    this.router.post('/', 
+      this.beforeCreate.bind(this),
+      this.create.bind(this),
+      this.afterCreate.bind(this));
+
+    return this.router;
+	}
+  errorHandler(res) {
+    return function(error) {
+      res.status(500)
+        .send(error)
+        .end();
+    };
   }
 }
 
-function errorHandler(err, req, res, next) {
-  res.status(500)
-    .send(err)
-    .end();
-}
-
-function paramPassThrough(resource, fn) {
-  return (req, res, next, resourceId) => {
-    fn(req, res, next, resourceId, resource);
-  }
-}
-
-let defaultOptions = {
-  actions: [
-    find,
-    findAll,
-    create,
-    update,
-    destroy
-  ],
-  param,
-  errorHandler
-}
-
-module.exports = function createJSDataRouter(resource, options) {
-    options = Object.assign({}, defaultOptions, options)
-
-    let router = express.Router();
-
-    options.actions.map((action) => {
-      addAction(router, resource, action);
-    });
-
-    router.param(':resourceId', paramPassThrough(resource, options.param));
-    router.use(options.errorHandler);
-
-    return router;
-}
+module.exports = JSDataRouter;
+Object.assign(JSDataRouter.prototype, findAll, find, create);
