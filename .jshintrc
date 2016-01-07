@@ -1,0 +1,22 @@
+{
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "freeze": true,
+  "indent": 2,
+  "newcap": true,
+  "quotmark": "single",
+  "maxdepth": 3,
+  "maxstatements": 25,
+  "maxlen": 150,
+  "eqnull": true,
+  "funcscope": true,
+  "node": true,
+  "esnext": true,
+  "expr": true,
+  "globals": {
+      "describe": false,
+      "it": false,
+      "sinon": false
+  }
+}
