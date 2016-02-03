@@ -19,6 +19,7 @@ module.exports = {
 
   afterFindAll: function(req, res, next) {
     res.status(200)
-      .send(req.resources);
+      .send(req.resources)
+      .end();
   }
 };
