@@ -2,7 +2,7 @@
 
 var paramFn = require('../src/param');
 
-describe('param', function() {
+describe('Param Function', function() {
   describe('param', function() {
     it('should call find on the resource for the resourceId and assign the result to req', function (done) {
       let resourceId = 1;

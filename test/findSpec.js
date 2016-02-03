@@ -2,7 +2,7 @@
 
 var findFns = require('../src/find');
 
-describe('find', function() {
+describe('Find Functions', function() {
 
   describe('beforeFind', function() {
     it('should call next by default', () => {

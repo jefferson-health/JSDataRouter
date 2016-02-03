@@ -2,7 +2,7 @@
 
 var updateFns = require('../src/update');
 
-describe('update', function() {
+describe('Update Functions', function() {
   describe('beforeUpdate', function() {
     it('should call next by default', () => {
       let nextSpy = sinon.spy();
