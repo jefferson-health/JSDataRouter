@@ -2,7 +2,7 @@
 
 var findAllFns = require('../src/findAll');
 
-describe('findAll', function() {
+describe('Find All Functions', function() {
   describe('beforeFindAll', function() {
     it('should call next by default', () => {
       let nextSpy = sinon.spy();

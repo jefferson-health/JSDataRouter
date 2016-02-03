@@ -2,7 +2,7 @@
 
 var createFns = require('../src/create');
 
-describe('create', function() {
+describe('Create Functions', function() {
 
   describe('beforeCreate', function() {
 

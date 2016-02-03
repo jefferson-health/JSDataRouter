@@ -2,7 +2,7 @@
 
 var destroyFns = require('../src/destroy');
 
-describe('destroy', function() {
+describe('Destroy Functions', function() {
 
   describe('beforeDestroy', function() {
 
