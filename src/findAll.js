@@ -13,12 +13,12 @@ module.exports = {
     .then(function(resources) {
       req.resources=resources;
       next();
-    })
-    .catch(this.errorHandler(res));
+    });
   },
 
   afterFindAll: function(req, res, next) {
     res.status(200)
-      .send(req.resources);
+      .send(req.resources)
+      .end();
   }
 };
