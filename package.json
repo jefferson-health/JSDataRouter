@@ -24,7 +24,14 @@
     "restful",
     "api"
   ],
-  "author": "",
+  "author": {
+    "name": "Dave Ramirez",
+    "email": "David.x.Ramirez@jefferson.edu"
+  },
+  "contributers": [{
+    "name": "Nate Vecchiarelli",
+    "email": "Nathan.Vecchiarelli@jefferson.edu"
+  }],
   "license": "MIT",
   "dependencies": {
     "express": "^4.13.3"
