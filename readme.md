@@ -2,7 +2,7 @@
 This library provides a set of default [Express](http://expressjs.com/) routes and handlers for use with [JSData](http://www.js-data.io/) to enable rapid RESTful API prototyping
 
 ## Installation
-npm install should get you all you need `npm install jsdatarouter`
+npm install should get you all you need: `npm install jsdatarouter`
 
 ## Usage
 The JSDataRouter is an ES6 class that takes a JSData resource definition (the same returned by [DS.defineResource](http://www.js-data.io/docs/dsdefineresource)) and express [router](http://expressjs.com/en/4x/api.html#router) object in its constructor and sets up RESTful routes and handlers on the router passed in. If no router is provided it will create a new one using `express.Router()`
@@ -92,7 +92,7 @@ class TodoRouter extends JsDataRouter {
 Routes that include a `resourceId` parameter will automatically retrieve the resource instance that has the specified ID form the DataStore using an express [param callback](http://expressjs.com/en/api.html#app.param), and make it available via `req.resource`. Query parameters and eager-loads (specified on `req.with`) along to the JSData [find](http://www.js-data.io/docs/dsfind) function when looking up the resource instance.
 
 ### Options
-By default all routes are enabled, but an optional options object can be assed into the constructor as a 3rd argument that allows you to disable each action individually. The example below will setup a new router with only the destroy route disabled.
+By default all routes are enabled, but an optional options object can be passed into the constructor as a 3rd argument that allows you to disable each action individually. The example below will setup a new router with only the destroy route disabled.
 ``` javascript
 var router = new JSDataRouter(
   DS.store.definitions.state,
